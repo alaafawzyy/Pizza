@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -20,15 +21,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.pizza.ui.pizzaToppingsGroup
 import com.example.pizza.ui.theme.MintGreen
+
 
 
 @Composable
 fun SousItems(
     modifier: Modifier = Modifier,
     items: List<Int>,
+    toggleIngredient: (Int) -> Unit
 ) {
-    var selectedIndex by remember { mutableStateOf(-1) }
+    var selectedIndex by remember { mutableIntStateOf(-1) }
 
     LazyRow {
         items(items.size) { index ->
@@ -36,7 +40,10 @@ fun SousItems(
                 index = index,
                 items = items,
                 selectedIndex = selectedIndex,
-                onClick = { selectedIndex = it }
+                onClick = {
+                    toggleIngredient(pizzaToppingsGroup[index])
+                    selectedIndex = index
+                }
             )
         }
     }
@@ -51,7 +58,8 @@ fun SousCard(
 ) {
     val isSelected = selectedIndex == index
     val backGroundColor by animateColorAsState(
-    targetValue = if (isSelected) MintGreen else Color.White,)
+        targetValue = if (isSelected) MintGreen else Color.White,
+    )
 
     Box(
         modifier = Modifier
@@ -73,7 +81,3 @@ fun SousCard(
         )
     }
 }
-
-
-
-

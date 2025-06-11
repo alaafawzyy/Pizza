@@ -30,20 +30,22 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun PizzaSizes(
-    modifier: Modifier=Modifier,
+    modifier: Modifier = Modifier,
     items: List<String>,
+    onSizeChange: (String) -> Unit,
+    selectedSize: String
 ) {
     Row(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
             .padding(16.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        var isSelected by remember { mutableStateOf("") }
         items.forEach { size ->
-            val offset = if (isSelected == size) -10.dp else 0.dp
-            val scale = if (isSelected == size) 1.2f else 1f
-            val elevation = if (isSelected == size) 50.dp else 0.dp
+            val offset = if (selectedSize == size) (-10).dp else 0.dp
+            val scale = if (selectedSize == size) 1.2f else 1f
+            val elevation = if (selectedSize == size) 50.dp else 0.dp
 
             Box(
                 modifier = Modifier
@@ -63,7 +65,9 @@ fun PizzaSizes(
                     modifier = Modifier
                         .fillMaxSize(0.9f)
                         .clip(CircleShape)
-                        .clickable { isSelected = size },
+                        .clickable {
+                            onSizeChange(size)
+                        },
                     colors = CardDefaults.cardColors(Color.White),
                     elevation = CardDefaults.cardElevation(0.dp)
                 ) {
@@ -78,5 +82,7 @@ fun PizzaSizes(
                         )
                     }
                 }
-            }} }
+            }
+        }
+    }
 }

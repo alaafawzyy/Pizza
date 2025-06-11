@@ -34,7 +34,7 @@ fun PizzaAppBar(
             contentDescription = null,
             tint = Color.Black
         )
-        Text(text = "Pizza", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Text(text = "Pizza", fontWeight = FontWeight.Bold, fontSize = 22.sp)
         Icon(
             painter = painterResource(id = R.drawable.ic_favorite),
             contentDescription = null,

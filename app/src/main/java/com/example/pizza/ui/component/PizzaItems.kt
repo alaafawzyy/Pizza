@@ -21,33 +21,34 @@ import com.example.pizza.R
 @Composable
 fun PizzaItems(
     modifier: Modifier = Modifier,
-    items: List<Int>)
-        {
+    items: List<Int>,
+) {
 
     val pagerState = rememberPagerState(pageCount = { items.size })
 
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center)
+    Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center)
     {
         Image(
             painter = painterResource(id = R.drawable.plate),
             contentDescription = null,
-            modifier = Modifier.size(180.dp)
+            modifier = Modifier.size(300.dp)
         )
 
 
-    HorizontalPager(
-        state = pagerState,
-        verticalAlignment = Alignment.CenterVertically
-    ) { page ->
+        HorizontalPager(
+            state = pagerState,
+            verticalAlignment = Alignment.CenterVertically
+        ) { page ->
 
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center)
-        {
-            Image(
-                painter = painterResource(id = items[page]),
-                contentDescription = null,
-                modifier = Modifier.size(150.dp)
-            )
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center)
+            {
+                Image(
+                    painter = painterResource(id = items[page]),
+                    contentDescription = null,
+                    modifier = Modifier.size(230.dp)
+                )
+            }
         }
     }
-}}
+}
 
